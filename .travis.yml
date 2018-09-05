@@ -5,8 +5,8 @@ android:
   - tools
   - platform-tools
   - tools
-  - build-tools-25.0.2
-  - android-25
+  - build-tools-26.0.2
+  - android-26
   - extra-google-google_play_services
   - extra-google-m2repository
   - extra-android-m2repository
@@ -25,7 +25,38 @@ licenses:
 - android-sdk-license-.+
 - google-gdk-license-.+
 before_install:
-  echo "Running before install section"
+  - echo "Running before install section"
+  - sudo apt-get update && \ apt-get install -y git wget curl unzip build-essential && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    apt-get update &&  \
+    apt-get install -y nodejs && \npm install -g npm@"$NPM_VERSION" cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION" && \
+    npm cache clear --force && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    dpkg --unpack google-chrome-stable_current_amd64.deb && \
+    apt-get install -f -y && \
+    apt-get clean && \
+    rm google-chrome-stable_current_amd64.deb && \
+    mkdir Sources && \
+    mkdir -p /root/.cache/yarn/ && \
+
+# Font libraries
+    apt-get -qqy install fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-cyrillic xfonts-scalable libfreetype6 libfontconfig && \
+
+# install python-software-properties (so you can do add-apt-repository)
+    apt-get update && apt-get install -y -q python-software-properties software-properties-common  && \
+    add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" -y && \
+    echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
+    apt-get update && apt-get -y install oracle-java8-installer && \
+
+# System libs for android enviroment
+    echo ANDROID_HOME="${ANDROID_HOME}" >> /etc/environment && \
+    dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y --force-yes expect ant wget libc6-i386 lib32stdc++6 lib32gcc1 lib32ncurses5 lib32z1 qemu-kvm kmod && \
+    apt-get clean && \
+    apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+ 
 before_script:
   echo "Running before script section"
 script:
