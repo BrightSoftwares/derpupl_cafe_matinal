@@ -1,6 +1,6 @@
 language: android
 dist: xenial
-sudo: required
+sudo: true
 android:
   components:
   - tools
@@ -46,7 +46,8 @@ before_install:
   - sudo apt-get install -y curl build-essential
   - sudo curl -sL https://deb.nodesource.com/setup_8.x | bash - 
   - sudo apt-get update 
-  - sudo apt-get install -y nodejs && \npm install -g npm@"$NPM_VERSION" cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION"
+  - sudo apt-get install -y nodejs 
+  - sudo npm install -g npm@"$NPM_VERSION" cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION"
   - sudo npm cache clear --force
   - sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   - sudo dpkg --unpack google-chrome-stable_current_amd64.deb
