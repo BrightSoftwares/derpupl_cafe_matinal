@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$TRAVIS_BRANCH" != "staged" ]; then
+    exit 0;
+fi
+
+
 git config --global user.email 'full3right@gmail.com'
 git config --global user.name 'Full Bright'
 git remote set-branches --add origin master
