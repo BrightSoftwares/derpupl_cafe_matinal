@@ -24,9 +24,23 @@ licenses:
 - android-sdk-preview-license-.+
 - android-sdk-license-.+
 - google-gdk-license-.+
+
+env:
+  - DEBIAN_FRONTEND=noninteractive
+  - ANDROID_HOME=/opt/android-sdk-linux
+  - NPM_VERSION=6.0.1
+  - IONIC_VERSION=3.20.0
+  - CORDOVA_VERSION=8.0.0
+  - YARN_VERSION=1.6.0
+  - GRADLE_VERSION=4.4.1
+    # Fix for the issue with Selenium, as described here:
+    # https://github.com/SeleniumHQ/docker-selenium/issues/87
+  - DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+
 before_install:
   - echo "Running before install section"
-  - sudo apt-get update && \ apt-get install -y git wget curl unzip build-essential && \
+  - sudo apt-get update && apt-get install -y curl build-essential && \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update &&  \
     apt-get install -y nodejs && \npm install -g npm@"$NPM_VERSION" cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION" && \
@@ -39,16 +53,16 @@ before_install:
     mkdir Sources && \
     mkdir -p /root/.cache/yarn/ && \
 
-# Font libraries
+    # Font libraries
     apt-get -qqy install fonts-ipafont-gothic xfonts-100dpi xfonts-75dpi xfonts-cyrillic xfonts-scalable libfreetype6 libfontconfig && \
 
-# install python-software-properties (so you can do add-apt-repository)
+    # install python-software-properties (so you can do add-apt-repository)
     apt-get update && apt-get install -y -q python-software-properties software-properties-common  && \
     add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" -y && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
     apt-get update && apt-get -y install oracle-java8-installer && \
 
-# System libs for android enviroment
+    # System libs for android enviroment
     echo ANDROID_HOME="${ANDROID_HOME}" >> /etc/environment && \
     dpkg --add-architecture i386 && \
     apt-get update && \
