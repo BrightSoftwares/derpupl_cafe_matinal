@@ -11,13 +11,16 @@ before_install:
 # Pull the latest code from master branch
 - git clone https://github.com/BrightSoftwares/derpupl_cafe_matinal.git 
 # Create a container with this code
-- docker run --name cafematinal -v $PWD/derpupl_cafe_matinal:/myApp:rw marcoturi/ionic
+#- docker run marcoturi/ionic -v $PWD/derpupl_cafe_matinal:/myApp:rw marcoturi/ionic
 # Listing the running containers
 - docker ps -a
 
 script:
 - echo "Executing release script"
-- docker run cafematinal /bin/sh -c "ionic cordova build android --prod --release"
+# Create a container with this code
+- docker run -v $PWD/derpupl_cafe_matinal:/myApp:rw marcoturi/ionic /bin/sh -c "ionic cordova build android --prod --release"
+#- docker run cafematinal /bin/sh -c "ionic cordova build android --prod --release"
+- docker ps -a
 
 deploy:
   provider: releases
