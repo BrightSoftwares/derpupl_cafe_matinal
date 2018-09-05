@@ -27,6 +27,9 @@ script:
 #- docker run cafematinal /bin/sh -c "ionic cordova build android --prod --release"
 - docker ps -a
 
+after_success:
+  - ./travis_merge_script.sh
+
 deploy:
   provider: releases
   api_key:
