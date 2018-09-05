@@ -1,0 +1,7 @@
+{
+  "name": "derpupl_cafe_matinal",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
