@@ -39,8 +39,7 @@ env:
 
 
 before_install:
-  - echo "Running before install section"
-  - sudo apt-get update && apt-get install -y curl build-essential && \
+  echo "Running before install section" && sudo apt-get update && apt-get install -y curl build-essential && \
     curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update &&  \
     apt-get install -y nodejs && \npm install -g npm@"$NPM_VERSION" cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION" && \
