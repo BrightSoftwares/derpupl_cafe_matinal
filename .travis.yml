@@ -6,6 +6,7 @@ services:
   - docker
 
 before_install:
+- echo "Executing the before install commands"
 # Pull the image from docker hub
 - docker pull marcoturi/ionic
 # Pull the latest code from master branch
@@ -16,9 +17,9 @@ before_install:
 - docker ps -a
 
 script:
-- echo "Executing release script"
+- echo "Executing release commands"
 # Create a container with this code
-- docker run -v $PWD/derpupl_cafe_matinal:/myApp:rw marcoturi/ionic /bin/sh -c "ionic cordova build android --prod --release"
+- docker run -v $PWD/derpupl_cafe_matinal:/myApp:rw marcoturi/ionic /bin/sh -c "cd /myApp; ionic cordova build android --prod --release"
 #- docker run cafematinal /bin/sh -c "ionic cordova build android --prod --release"
 - docker ps -a
 
