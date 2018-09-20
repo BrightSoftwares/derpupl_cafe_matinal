@@ -37,6 +37,6 @@ deploy:
   file: platforms/android/app/build/outputs/apk/release/*.apk
   
   # Do not clean the files generated to be able to upload them
-  skip_cleanup: true
+  #skip_cleanup: true
   on:
     repo: BrightSoftwares/derpupl_cafe_matinal
