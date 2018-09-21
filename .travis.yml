@@ -23,18 +23,19 @@ before_install:
 script:
 - echo "Executing release commands"
 # Create a container with this code
-- docker run -v $PWD/derpupl_cafe_matinal:/myApp:rw marcoturi/ionic /bin/sh -c "cd /myApp; npm install; ionic cordova build android --prod --release"
+- docker run -v $TRAVIS_BUILD_DIR:/myApp:rw marcoturi/ionic /bin/sh -c "cd /myApp; npm install; ionic cordova build android --prod --release"
 #- docker run cafematinal /bin/sh -c "ionic cordova build android --prod --release"
 - docker ps -a
 - echo "we are in thsthe directory $PWD and the Travis build directory is $TRAVIS_BUILD_DIR "
 - ls -la $PWD
-- is -la $TRAVIS_BUILD_DIR
+- ls -la $TRAVIS_BUILD_DIR
 
 after_success:
   - ./travis_merge_script.sh
 
 before_deploy:
   - git tag "cafe-matinal-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+  
 deploy:
   provider: releases
   api_key:
