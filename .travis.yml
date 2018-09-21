@@ -35,6 +35,8 @@ after_success:
 
 before_deploy:
   - git tag "cafe-matinal-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+  - ls -la $PWD
+  - ls -la $TRAVIS_BUILD_DIR
   
 deploy:
   provider: releases
