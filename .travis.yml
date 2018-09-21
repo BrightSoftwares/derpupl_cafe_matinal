@@ -12,7 +12,7 @@ before_install:
 - ls -la $TRAVIS_BUILD_DIR
 #- cp $TRAVIS_BUILD_DIR/.keystore $HOME
 - ls -la $HOME
-- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/cafematinal_keystore.jks -storepass $store_password -keypass $keystore_password test-release-unsigned.apk $keystore_alias
+- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore cafematinal_keystore.jks -storepass $store_password -keypass $keystore_password test-release-unsigned.apk $keystore_alias
 - jarsigner -verify test-release-unsigned.apk
 - "${ANDROID_HOME}/build-tools/24.0.2/zipalign -v 4 test-release-unsigned.apk test_app.apk"
 
