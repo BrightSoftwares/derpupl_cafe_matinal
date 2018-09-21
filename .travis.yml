@@ -40,6 +40,8 @@ before_deploy:
   - ls -la $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/
   #- ls -la $TRAVIS_BUILD_DIR/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/
   - cp $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk $TRAVIS_BUILD_DIR/cafematinal-release-unsigned.apk
+  - ls -la $TRAVIS_BUILD_DIR
+  - ls -la $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/
   
 deploy:
   provider: releases
@@ -49,6 +51,7 @@ deploy:
   #file: /myApp/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
   files: 
     - $TRAVIS_BUILD_DIR/cafematinal-release-unsigned.apk
+    - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     #- $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     #- $PWD/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     #- $TRAVIS_BUILD_DIR/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
