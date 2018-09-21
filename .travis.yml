@@ -10,7 +10,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_821ed9edb936_key -iv $encrypted_821ed9edb936_iv -in cafematinal_keystore.jks.enc -out cafematinal_keystore.jks -d
 
 - ls -la $TRAVIS_BUILD_DIR
-- cp $TRAVIS_BUILD_DIR/.keystore $HOME
+#- cp $TRAVIS_BUILD_DIR/.keystore $HOME
 - ls -la $HOME
 - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/cafematinal_keystore.jks -storepass $store_password -keypass $keystore_password test-release-unsigned.apk $keystore_alias
 - jarsigner -verify test-release-unsigned.apk
