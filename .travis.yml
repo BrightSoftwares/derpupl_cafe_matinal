@@ -4,6 +4,12 @@ branches:
   - staged
 sudo: required
 language: android
+android:
+  components:
+    - tools
+    - build-tools-24.0.2
+    - android-26
+    - tools
 services:
 - docker
 before_install:
