@@ -60,6 +60,7 @@ deploy:
     - $TRAVIS_BUILD_DIR/cafematinal-release-unsigned.apk
     - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     - $TRAVIS_BUILD_DIR/cafematinal_app.apk
+    - $TRAVIS_BUILD_DIR/test_app.apk
     #- $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     #- $PWD/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     #- $TRAVIS_BUILD_DIR/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
