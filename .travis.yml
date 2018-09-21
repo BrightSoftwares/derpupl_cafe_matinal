@@ -26,7 +26,9 @@ script:
 - docker run -v $PWD/derpupl_cafe_matinal:/myApp:rw marcoturi/ionic /bin/sh -c "cd /myApp; npm install; ionic cordova build android --prod --release"
 #- docker run cafematinal /bin/sh -c "ionic cordova build android --prod --release"
 - docker ps -a
-- ls -la
+- echo "we are in thsthe directory $PWD and the Travis build directory is $TRAVIS_BUILD_DIR "
+- ls -laR $PWD
+- is -laR $TRAVIS_BUILD_DIR
 
 after_success:
   - ./travis_merge_script.sh
@@ -42,6 +44,7 @@ deploy:
   files: 
     - $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
     - /myApp/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+    - /myApp/platforms/android/app/build/outputs/apk/release/app-release-unsigned2.apk
   
   # Do not clean the files generated to be able to upload them
   skip_cleanup: true
