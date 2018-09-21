@@ -44,7 +44,7 @@ deploy:
   files: 
     - $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
     - /myApp/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
-    - /myApp/platforms/android/app/build/outputs/apk/release/app-release-unsigned2.apk
+    - $PWD/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
   
   # Do not clean the files generated to be able to upload them
   skip_cleanup: true
