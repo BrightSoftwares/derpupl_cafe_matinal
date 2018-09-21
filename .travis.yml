@@ -27,8 +27,8 @@ script:
 #- docker run cafematinal /bin/sh -c "ionic cordova build android --prod --release"
 - docker ps -a
 - echo "we are in thsthe directory $PWD and the Travis build directory is $TRAVIS_BUILD_DIR "
-- ls -laR $PWD
-- is -laR $TRAVIS_BUILD_DIR
+- ls -la $PWD
+- is -la $TRAVIS_BUILD_DIR
 
 after_success:
   - ./travis_merge_script.sh
@@ -42,7 +42,7 @@ deploy:
   #file: platforms/android/app/build/outputs/apk/release/*.apk
   #file: /myApp/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
   files: 
-    - $TRAVIS_BUILD_DIR/android/app/build/outputs/apk/app-release-unsigned.apk
+    - $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/app-release-unsigned.apk
     - /myApp/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     - $PWD/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
   
