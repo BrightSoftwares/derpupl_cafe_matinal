@@ -31,6 +31,8 @@ script:
 after_success:
   - ./travis_merge_script.sh
 
+before_deploy:
+  - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
 deploy:
   provider: releases
   api_key:
