@@ -7,7 +7,7 @@ language: android
 services:
 - docker
 before_install:
-- openssl aes-256-cbc -K $encrypted_821ed9edb936_key -iv $encrypted_821ed9edb936_iv -in $TRAVIS_BUILD_DIR/cafematinal_keystore.jks.enc -out cafematinal_keystore.jks -d
+- openssl aes-256-cbc -K $encrypted_821ed9edb936_key -iv $encrypted_821ed9edb936_iv -in cafematinal_keystore.jks.enc -out cafematinal_keystore.jks -d
 - echo "Executing the before install commands"
 - docker pull marcoturi/ionic
 - git clone https://github.com/BrightSoftwares/derpupl_cafe_matinal.git
