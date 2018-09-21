@@ -46,8 +46,8 @@ before_deploy:
   $TRAVIS_BUILD_DIR/cafematinal-release-unsigned.apk
 - ls -la $TRAVIS_BUILD_DIR
 - ls -la $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/
-- cp $TRAVIS_BUILD_DIR/.keystore $HOME
-- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/cafematinal_keystore.jks -storepass $store_password -keypass $keystore_password cafematinal-release-unsigned.apk $keystore_alias
+#- cp $TRAVIS_BUILD_DIR/.keystore $HOME
+- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore cafematinal_keystore.jks -storepass $store_password -keypass $keystore_password cafematinal-release-unsigned.apk $keystore_alias
 - jarsigner -verify cafematinal-release-unsigned.apk
 - "${ANDROID_HOME}/build-tools/24.0.2/zipalign -v 4 cafematinal-release-unsigned.apk cafematinal_app.apk"
 deploy:
