@@ -23,12 +23,12 @@ before_install:
 - "${ANDROID_HOME}/build-tools/24.0.2/zipalign -v 4 test-release-unsigned.apk test_app.apk"
 
 - echo "Executing the before install commands"
-- docker pull marcoturi/ionic
+- docker pull fullbright/ionic
 - git clone https://github.com/BrightSoftwares/derpupl_cafe_matinal.git
 - docker ps -a
 script:
 - echo "Executing release commands"
-- docker run -v $TRAVIS_BUILD_DIR:/myApp:rw marcoturi/ionic /bin/sh -c "cd /myApp;
+- docker run -v $TRAVIS_BUILD_DIR:/myApp:rw fullbright/ionic /bin/sh -c "cd /myApp;
   npm install; ionic cordova build android --prod --release"
 - docker ps -a
 - echo "we are in the directory $PWD and the Travis build directory is $TRAVIS_BUILD_DIR
