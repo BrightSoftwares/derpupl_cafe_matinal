@@ -1,43 +1,45 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Accueil</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content> 
   <ion-list> 
-    <ion-card>
+    <ion-card *ngFor="let post of (posts | async)?.items" (click) = "viewPost(post)">
       <ion-item>
         <ion-avatar item-start>
-          <img src="https://picsum.photos/200">
+          <img src="{{post.author.image.url}}">
         </ion-avatar>
-        <h2>Marty McFly</h2>
-        <p>November 5, 1955</p>
+        <h2>{{post.title}}</h2>
+        <p>{{post.published}}</p>
       </ion-item>
 
-      <img src="https://picsum.photos/200">
+      <img src="{{post.picture}}">
 
       <ion-card-content>
-        <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
+        <p [innerHTML]="post.content"></p>
+        <p>{{post.content | slice : 0 : 200}}</p>
       </ion-card-content>
 
       <ion-row>
         <ion-col>
           <button ion-button icon-start clear small>
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>12 Likes</div>
+            <ion-icon name="folder-open"></ion-icon>
+            <div>{{post.category}}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="pricetags"></ion-icon>
+            <ion-item *ngFor="let label of post.labels"><span>{{label}}</span></ion-item>
           </button>
         </ion-col>
         <ion-col>
           <button ion-button icon-start clear small>
             <ion-icon name="text"></ion-icon>
-            <div>4 Comments</div>
+            <div>{{post.replies.totalItems}} commentaires</div>
           </button>
-        </ion-col>
-        <ion-col center text-center>
-          <ion-note>
-            11h ago
-          </ion-note>
         </ion-col>
       </ion-row>
     </ion-card>
