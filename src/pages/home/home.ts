@@ -15,17 +15,28 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public httpClient: HttpClient, public dataService: DataProvider) {
   	
-  	let url = "https://www.googleapis.com/blogger/v3/blogs/1092067423469472535/posts?key=AIzaSyBO6PbP0hPWKzXa8OfBeRzVk-qOpzYUnI8"
+  	
+  	this.pullBloggerPosts();
+  	
+  }
 
-  	/**let postsData = this.httpClient.get(url);
+  pullBloggerPosts(){
 
-  	postsData.subscribe( (data) => {
-  		console.log('My data: ', data);
-  		console.log('Data type is', data.constructor.name);
-  		this.posts = JSON.parse(data.toString()).items;
-  	} );*/
+    let url = "https://www.googleapis.com/blogger/v3/blogs/1092067423469472535/posts?key=AIzaSyBO6PbP0hPWKzXa8OfBeRzVk-qOpzYUnI8"
 
-  	this.posts = this.httpClient.get(url);
+    this.posts = this.httpClient.get(url);
+
+  }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    this.pullBloggerPosts();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
   }
 
   ionViewDidLoad(){
