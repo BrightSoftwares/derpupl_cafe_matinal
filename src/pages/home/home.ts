@@ -3,6 +3,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
+import { PostDetailPage } from '../post-detail/post-detail';
 import { DataProvider } from '../../providers/data/data';
 
 @Component({
@@ -18,7 +19,7 @@ export class HomePage {
   				public dataService: DataProvider) {
   	
   	
-  	this.posts = this.dataService.pullBloggerPosts().then((posts) => {
+  	this.dataService.pullBloggerPosts().then((posts) => {
   		this.posts = posts;
   	});
   	
@@ -87,7 +88,7 @@ export class HomePage {
   }
 
   viewPost(post){
-
+    this.navCtrl.push(PostDetailPage, { thePost: post });
   }
   
 

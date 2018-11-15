@@ -9,6 +9,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { PostDetailPage } from '../pages/post-detail/post-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,7 +23,8 @@ import { ConstantsProvider } from '../providers/constants/constants';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    PostDetailPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { ConstantsProvider } from '../providers/constants/constants';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    PostDetailPage
   ],
   providers: [
     StatusBar,
