@@ -18,7 +18,9 @@ export class HomePage {
   				public dataService: DataProvider) {
   	
   	
-  	this.posts = this.dataService.pullBloggerPosts();
+  	this.posts = this.dataService.pullBloggerPosts().then((posts) => {
+  		this.posts = posts;
+  	});
   	
   }
 
@@ -26,8 +28,9 @@ export class HomePage {
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 
-    this.posts = this.dataService.pullBloggerPosts().then(() => {
+    this.dataService.pullBloggerPosts().then((posts) => {
       console.log('Async operation has ended');
+      this.posts = posts;
       refresher.complete();
     });
   }

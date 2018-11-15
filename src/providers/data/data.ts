@@ -21,7 +21,7 @@ export class DataProvider {
   }
 
 
-  pullBloggerPosts(){
+  async pullBloggerPosts(){
 
     let url = this.constantsProvider.getBlogApiUrl();
 
