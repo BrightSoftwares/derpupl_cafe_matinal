@@ -13,30 +13,23 @@ export class HomePage {
 
   public posts : Observable<any>;
 
-  constructor(public navCtrl: NavController, public httpClient: HttpClient, public dataService: DataProvider) {
+  constructor(public navCtrl: NavController, 
+  				public httpClient: HttpClient, 
+  				public dataService: DataProvider) {
   	
   	
-  	this.pullBloggerPosts();
+  	this.posts = this.dataService.pullBloggerPosts();
   	
   }
 
-  pullBloggerPosts(){
-
-    let url = "https://www.googleapis.com/blogger/v3/blogs/1092067423469472535/posts?key=AIzaSyBO6PbP0hPWKzXa8OfBeRzVk-qOpzYUnI8"
-
-    this.posts = this.httpClient.get(url);
-
-  }
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 
-    this.pullBloggerPosts();
-
-    setTimeout(() => {
+    this.posts = this.dataService.pullBloggerPosts().then(() => {
       console.log('Async operation has ended');
       refresher.complete();
-    }, 2000);
+    });
   }
 
   ionViewDidLoad(){
