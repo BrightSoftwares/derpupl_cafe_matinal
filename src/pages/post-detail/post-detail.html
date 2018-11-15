@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{post.title}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="{{post.author.image.url}}">
+        </ion-avatar>
+        <p>{{post.published}}</p>
+      </ion-item>
+
+      <img src="{{post.picture}}">
+
+      <ion-card-content>
+        <p [innerHTML]="post.content"></p>
+      </ion-card-content>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="folder-open"></ion-icon>
+            <div>{{post.category}}</div>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="pricetags"></ion-icon>
+            <ion-item *ngFor="let label of post.labels"><span>{{label}}</span></ion-item>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-start clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>{{post.replies.totalItems}} commentaires</div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+</ion-content>
