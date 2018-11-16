@@ -1,22 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Storage, SqlStorage } from 'ionic-angular';
 
 import { ConstantsProvider } from '../constants/constants';
 
 @Injectable()
 export class DataProvider {
 
+  public storage;
+
   constructor(public http: HttpClient,
   				public constantsProvider: ConstantsProvider) {
     console.log('Hello! DataProvider Provider constructed.');
+    this.storage = new Storage(SqlStorage);
   }
 
-  getData(){
-  	
+  getAllPostsData(){
+  	return this.storage.get("all_posts");
   }
 
-  save(){
-
+  saveAllPostsData(posts){
+    this.storage.set("all_posts", posts);
   }
 
   async pullBloggerPosts(){
@@ -24,12 +28,14 @@ export class DataProvider {
     let url = this.constantsProvider.getBlogApiUrl();
 
     try {
-	  return this.http.get(url);
-	}
-	catch(e) {
-	  console.log(e);
+	    let allPosts = this.http.get(url);
+      this.saveAllPostsData(allPosts);
+      return allPosts;
+  	}
+  	catch(e) {
+  	  console.log(e);
 
-	}
+  	}
   }
 
 }
