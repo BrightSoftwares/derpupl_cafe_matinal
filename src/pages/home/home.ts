@@ -3,10 +3,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NavController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 
-<<<<<<< HEAD
 import { PostDetailPage } from '../post-detail/post-detail';
-=======
->>>>>>> 0fbc2244d670a9516b8c31c2d0128a0b2460e2bc
 import { DataProvider } from '../../providers/data/data';
 
 @Component({
@@ -17,7 +14,6 @@ export class HomePage {
 
   public posts : Observable<any>;
 
-<<<<<<< HEAD
   constructor(public navCtrl: NavController, 
   				public httpClient: HttpClient, 
   				public dataService: DataProvider) {
@@ -29,40 +25,15 @@ export class HomePage {
   	
   }
 
-=======
-  constructor(public navCtrl: NavController, public httpClient: HttpClient, public dataService: DataProvider) {
-  	
-  	
-  	this.pullBloggerPosts();
-  	
-  }
-
-  pullBloggerPosts(){
-
-    let url = "https://www.googleapis.com/blogger/v3/blogs/1092067423469472535/posts?key=AIzaSyBO6PbP0hPWKzXa8OfBeRzVk-qOpzYUnI8"
-
-    this.posts = this.httpClient.get(url);
-
-  }
->>>>>>> 0fbc2244d670a9516b8c31c2d0128a0b2460e2bc
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
 
-<<<<<<< HEAD
     this.dataService.pullBloggerPosts().then((posts) => {
       console.log('Async operation has ended');
       this.posts = posts;
       refresher.complete();
     });
-=======
-    this.pullBloggerPosts();
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
->>>>>>> 0fbc2244d670a9516b8c31c2d0128a0b2460e2bc
   }
 
   ionViewDidLoad(){
@@ -115,11 +86,6 @@ export class HomePage {
   	**/
 
   }
-<<<<<<< HEAD
-=======
-
-  viewPost(post){
->>>>>>> 0fbc2244d670a9516b8c31c2d0128a0b2460e2bc
 
   viewPost(post){
     this.navCtrl.push(PostDetailPage, { thePost: post });
