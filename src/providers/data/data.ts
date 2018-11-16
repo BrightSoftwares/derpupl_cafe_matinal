@@ -1,18 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Storage, SqlStorage } from 'ionic-angular';
+//import { Storage, SqlStorage } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { ConstantsProvider } from '../constants/constants';
 
 @Injectable()
 export class DataProvider {
 
-  public storage;
+  //public storage;
 
   constructor(public http: HttpClient,
-  				public constantsProvider: ConstantsProvider) {
+  				public constantsProvider: ConstantsProvider,
+          public storage: Storage) {
     console.log('Hello! DataProvider Provider constructed.');
-    this.storage = new Storage(SqlStorage);
+    //this.storage = new Storage(SqlStorage);
   }
 
   getAllPostsData(){
@@ -29,7 +31,8 @@ export class DataProvider {
 
     try {
 	    let allPosts = this.http.get(url);
-      this.saveAllPostsData(allPosts);
+      //this.saveAllPostsData(allPosts);
+      console.log(allPosts);
       return allPosts;
   	}
   	catch(e) {
