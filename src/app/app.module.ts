@@ -14,7 +14,10 @@ import { PostDetailPage } from '../pages/post-detail/post-detail';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataProvider } from '../providers/data/data';
+<<<<<<< HEAD
 import { ConstantsProvider } from '../providers/constants/constants';
+=======
+>>>>>>> 0fbc2244d670a9516b8c31c2d0128a0b2460e2bc
 
 
 @NgModule({
@@ -44,8 +47,12 @@ import { ConstantsProvider } from '../providers/constants/constants';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+<<<<<<< HEAD
     DataProvider,
     ConstantsProvider
+=======
+    DataProvider
+>>>>>>> 0fbc2244d670a9516b8c31c2d0128a0b2460e2bc
   ]
 })
 export class AppModule {}
