@@ -14,7 +14,7 @@ services:
 - docker
 before_install:
 - openssl aes-256-cbc -K $encrypted_821ed9edb936_key -iv $encrypted_821ed9edb936_iv -in cafematinal_keystore.jks.enc -out cafematinal_keystore.jks -d
-
+- apt-get update && apt-get install wine -y
 - ls -la $TRAVIS_BUILD_DIR
 #- cp $TRAVIS_BUILD_DIR/.keystore $HOME
 - ls -la $HOME
@@ -29,12 +29,14 @@ before_install:
 script:
 - echo "Executing release commands"
 - docker run -v $TRAVIS_BUILD_DIR:/myApp:rw fullbright/ionic /bin/sh -c "cd /myApp;
-  npm install; ionic cordova build android --prod --release"
+  npm install; ionic cordova build android --prod --release; ./node_modules/.bin/electron-builder"
 - docker ps -a
 - echo "we are in the directory $PWD and the Travis build directory is $TRAVIS_BUILD_DIR
   "
 - ls -la $PWD
 - ls -la $TRAVIS_BUILD_DIR
+#- echo "Building desktop electron application for Linux, Windows and Mac"
+#- ./node_modules/.bin/electron-builder
 after_success:
 - "./travis_merge_script.sh"
 before_deploy:
@@ -60,6 +62,8 @@ deploy:
     - $TRAVIS_BUILD_DIR/cafematinal-release-unsigned.apk
     #- $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     - $TRAVIS_BUILD_DIR/cafematinal_app.apk
+    - $TRAVIS_BUILD_DIR/derpupl-cafe-matinal_0.0.1_amd64.deb
+    
     #- $TRAVIS_BUILD_DIR/test_app.apk
     #- $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     #- $PWD/derpupl_cafe_matinal/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
