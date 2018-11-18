@@ -48,6 +48,7 @@ before_deploy:
   $TRAVIS_BUILD_DIR/cafematinal-release-unsigned.apk
 - ls -la $TRAVIS_BUILD_DIR
 - ls -la $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/
+- ls -la $TRAVIS_BUILD_DIR/dist
 #- cp $TRAVIS_BUILD_DIR/.keystore $HOME
 - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore cafematinal_keystore.jks -storepass $store_password -keypass $keystore_password cafematinal-release-unsigned.apk $keystore_alias
 - jarsigner -verify cafematinal-release-unsigned.apk
@@ -62,7 +63,7 @@ deploy:
     - $TRAVIS_BUILD_DIR/cafematinal-release-unsigned.apk
     #- $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
     - $TRAVIS_BUILD_DIR/cafematinal_app.apk
-    - $TRAVIS_BUILD_DIR/derpupl-cafe-matinal_0.0.1_amd64.deb
+    - $TRAVIS_BUILD_DIR/dist/derpupl-cafe-matinal_0.0.1_amd64.deb
     
     #- $TRAVIS_BUILD_DIR/test_app.apk
     #- $TRAVIS_BUILD_DIR/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
