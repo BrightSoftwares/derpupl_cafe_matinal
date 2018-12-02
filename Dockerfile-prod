@@ -12,10 +12,9 @@ ENV DEBIAN_FRONTEND=noninteractive \
     # https://github.com/SeleniumHQ/docker-selenium/issues/87
     DBUS_SESSION_BUS_ADDRESS=/dev/null
 
-# Install basics
+# Install basics and Wine PPA
 RUN apt-get update &&  \
     apt-get install -y git wget curl unzip build-essential && \
-    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
     apt-get update &&  \
     apt-get install -y nodejs && \
     npm install -g npm@"$NPM_VERSION" cordova@"$CORDOVA_VERSION" ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION" && \
@@ -36,6 +35,12 @@ RUN apt-get update &&  \
     add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" -y && \
     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
     apt-get update && apt-get -y install oracle-java8-installer && \
+    curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+    wget https://dl.winehq.org/wine-builds/Release.key && \
+    apt-key add Release.key && \
+    apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/' && \
+    apt-get install winehq-stable -y && \
+    
 
 # System libs for android enviroment
     echo ANDROID_HOME="${ANDROID_HOME}" >> /etc/environment && \
