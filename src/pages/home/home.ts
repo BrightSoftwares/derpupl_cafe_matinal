@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { PostDetailPage } from '../post-detail/post-detail';
 import { DataProvider } from '../../providers/data/data';
+import { CacheService } from 'ionic-cache-observable'
 
 @Component({
   selector: 'page-home',
@@ -16,8 +17,8 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, 
   				public httpClient: HttpClient, 
-  				public dataService: DataProvider) {
-  	
+  				public dataService: DataProvider,
+          private cacheService: CacheService) {
   	
   	this.dataService.pullBloggerPosts().then((posts) => {
   		this.posts = posts;
@@ -38,53 +39,36 @@ export class HomePage {
 
   ionViewDidLoad(){
 
-  	/**
-  	this.posts = [
-  		{
-  			title: "Love God", 
-  			content: "With all my heart and all my strength.",
-  			picture: "https://picsum.photos/200/300/?random",
-  			authorAvatar: "assets/imgs/marty_mcfly.jpg",
-  			publishDate: "5 Novembre 2018",
-  			timeElapsed: "3h",
-  			category: "annonce",
-  			tags: ["fête", "libération"],
-  			nbLikes: 4,
-  			nbComments: 8
-  		},
-  		{
-  			title: "Love my wife", 
-  			content: "Like Jeus loved the church.",
-  			picture: "https://picsum.photos/200/300/?random",
-  			authorAvatar: "assets/imgs/marty_mcfly.jpg",
-  			publishDate: "7 Novembre 2018",
-  			timeElapsed: "3d",
-  			category: "enseignement",
-  			tags: ["fidélité", "sagesse"],
-  			nbLikes: 45,
-  			nbComments: 87
-  		},
-  		{
-  			title: "Love my children", 
-  			content: "Like I love myself.",
-  			picture: "https://picsum.photos/200/300/?random",
-  			authorAvatar: "assets/imgs/marty_mcfly.jpg",
-  			publishDate: "15 Novembre 2018",
-  			timeElapsed: "33h",
-  			category: "annonce",
-  			tags: ["foi", "fidélité"],
-  			nbLikes: 34,
-  			nbComments: 18
-  		}
 
-  	];
-  	
+  }
 
-  	this.dataService.getData().then((data) => {
-  		this.posts = data.items;
-  	});
-  	**/
+  /*
+  ionViewWillEnter() {
+    // The observable you normally get items from server with.
+    let postsListObservable: Observable<Any> = this.dataService.pullBloggerPosts();
 
+    this.cacheService
+        .register('postsList', postsListObservable)
+        .mergeMap((cache: Cache<Any>) => cache.get())
+        .subscribe((postsList) => {
+          // The shopping list is retrieved from local storage,
+          // or in the case that it doesn't exist in storage yet;
+          // by triggering your postsListObservable.
+          this.posts = postsList;
+        });
+
+  }
+  */
+
+  refreshShoppingList() {
+      this.cacheService
+          .get('postsList')
+          .mergeMap((cache: Cache<Any>) => cache.refresh())
+          .subscribe((postsList) => {
+            // The shopping list was just "refreshed" by calling the
+            // shoppingListProvider observable that was registered with the cache.
+            this.posts = postsList;
+          });
   }
 
   viewPost(post){

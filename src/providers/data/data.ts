@@ -9,6 +9,9 @@ import { ConstantsProvider } from '../constants/constants';
 export class DataProvider {
 
   //public storage;
+  /*title: string;
+  posts: any[];
+  */
 
   constructor(public http: HttpClient,
   				public constantsProvider: ConstantsProvider,
@@ -28,17 +31,39 @@ export class DataProvider {
   async pullBloggerPosts(){
 
     let url = this.constantsProvider.getBlogApiUrl();
+    console.log("Pulling data from : " + url);
 
     try {
 	    let allPosts = this.http.get(url);
-      //this.saveAllPostsData(allPosts);
+      ////this.saveAllPostsData(allPosts);
       console.log(allPosts);
       return allPosts;
+
+      /*this.http.get(url).subscribe(response => {
+        let data = response.json();
+        this.title = data.name;
+        this.getPosts(data.posts.selfLink);
+      });*/
   	}
   	catch(e) {
   	  console.log(e);
 
   	}
   }
+
+  getPosts(url:string) {
+    let fullurl = url+'?key='+this.constants.getApiKey();
+    console.log("Pulling posts data from " + fullurl);
+
+    this.http.get(fullurl)
+      .subscribe(response => {
+        let data = response.json();
+        this.posts = data.items;
+      });
+  }
+
+  
+
+
 
 }

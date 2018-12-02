@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { CacheModule } from 'ionic-cache-observable';
 
 import { MyApp } from './app.component';
 
@@ -33,7 +34,8 @@ import { PreferencesProvider } from '../providers/preferences/preferences';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot({ name: '__mydb', driverOrder: ['indexeddb', 'sqlite', 'websql'] })
+    IonicStorageModule.forRoot({ name: '__mydb', driverOrder: ['indexeddb', 'sqlite', 'websql'] }),
+    CacheModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
