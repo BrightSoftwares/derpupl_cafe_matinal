@@ -35,6 +35,7 @@ script:
   "
 - ls -la $PWD
 - ls -la $TRAVIS_BUILD_DIR
+- ls -la $TRAVIS_BUILD_DIR/dist
 #- echo "Building desktop electron application for Linux, Windows and Mac"
 #- ./node_modules/.bin/electron-builder
 after_success:
