@@ -82,8 +82,8 @@
     "@ionic/app-scripts": "3.2.4",
     "@ionic/lab": "1.0.13",
     "typescript": "~2.6.2",
-    "electron": "^19.0.11",
-    "electron-builder": "^20.36.2",
+    "electron": "^24.4.0",
+    "electron-builder": "^23.6.0",
     "electron-installer-linux": "^2.0.0",
     "electron-installer-windows": "^1.1.0",
     "electron-packager": "^17.1.1"
